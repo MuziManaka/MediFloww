@@ -89,6 +89,7 @@ namespace Eish.Models
 
         }
 
+        //=========  Paitent Class ============
         public class Patient : Person
         {
 
@@ -108,6 +109,8 @@ namespace Eish.Models
             }
 
         }
+
+        // ====== Doctor ========
         public class Doctor : Person
         {
             public string EmployeeID { get; set; }
@@ -125,10 +128,123 @@ namespace Eish.Models
 
         }
 
+        public class DoctorManager 
+        {
+            private List<Doctor> DoctorList = new List<Doctor>();
+
+            public void Add(Doctor doctor)
+            {
+                DoctorList.Add(doctor);
+            }
+
+            public Doctor Search(string employeID)
+            {
+                return DoctorList.FirstOrDefault(d => d.EmployeeID == employeID);
+            }
+
+            public void Edit(string employeeid)
+            {
+                Console.WriteLine("Please enter paitent ID");
+                if (string.IsNullOrEmpty(employeeid))
+                {
+                    Console.WriteLine("ID cannot be empty");
+                }
+                else
+                {
+                    Doctor d = Search(employeeid);
+                    Console.WriteLine("What information do you want to change");
+                    Console.WriteLine("1. Name");
+                    Console.WriteLine("2. Surname");
+                    Console.WriteLine("3. Age");
+                    Console.WriteLine("4. Address ");
+                    Console.WriteLine("5. Department");
+                    Console.WriteLine("6. Availablity");
+                    Console.WriteLine("Please enter number 1-6");
+
+                    int answer;
+                    if (!int.TryParse(Console.ReadLine(), out answer))
+                    {
+                        Console.WriteLine("Cannot retrive answer");
+                    }
+                    else
+                    {
+                        switch (answer)
+                        {
+                            case 1:
+                                Console.WriteLine("Please enter name");
+                                string name = Console.ReadLine();
+                                d.Name = name;
+                                break;
+
+                            case 2:
+                                Console.WriteLine("Please enter surname");
+                                string surname = Console.ReadLine();
+                                d.Surname = surname;
+                                break;
+
+                            case 3:
+                                Console.WriteLine("Please enter age");
+                                int age = int.Parse(Console.ReadLine());
+                                d.Age = age;
+                                break;
+
+                            case 4:
+                                Console.WriteLine("Please enter address");
+                                string address = Console.ReadLine();
+                                d.Address = address;
+                                break;
+
+                            case 5:
+                                Console.WriteLine("Please enter blood type");
+                                string department = Console.ReadLine();
+                                d.Department = department;
+                                break;
+
+                            case 6:
+                                Console.WriteLine("Please enter medical condition");
+                                string availabilty = Console.ReadLine();
+                                d.Availability = availabilty;
+                                break;
+                        }
+                    }
+
+                }
+            }
+            public void Delete(string id)
+            {
+                Doctor d = Search(id);
+
+                if (d != null)
+                {
+                    DoctorList.Remove(d);
+                }
+            }
+
+            public void Display(Doctor doctor)
+            {
+                foreach (Doctor doc in DoctorList)
+                {
+                    Console.WriteLine(doc);
+                }
+            }
+        }
+        // ========= Patient Manager ========
         public class PatientManager
         {
             private List<Patient> PaitentList = new List<Patient>();
 
+            public bool IsValidName(string name)
+            {
+                if (string.IsNullOrEmpty(name))
+                {
+                    Console.WriteLine("Name cannot be empty");
+                    return false;
+                }
+                else 
+                {
+                    return true; 
+                }
+            }
             public void Add(Patient paitent)
             {
                 PaitentList.Add(paitent);
@@ -141,9 +257,78 @@ namespace Eish.Models
 
             public void Edit(string id)
             {
-                Patient p = Search(id);
-                Console.WriteLine("what information would you like to change"); // this part im sure i can create something in teh UI to document this??
-                // ohh and some checking maybe. if they say name we will validate the input and change... but i dont think its wise to change but the concept applies
+                Console.WriteLine("Please enter paitent ID");
+                if (string.IsNullOrEmpty(id))
+                {
+                    Console.WriteLine("ID cannot be empty");
+                }
+                else
+                {
+                    Patient p = Search(id);
+                    Console.WriteLine("What information do you want to change");
+                    Console.WriteLine("1. Name");
+                    Console.WriteLine("2. Surname");
+                    Console.WriteLine("3. Age");
+                    Console.WriteLine("4. Address ");
+                    Console.WriteLine("5. Blood Type");
+                    Console.WriteLine("6. Medical Condition");
+                    Console.WriteLine("7. Priority Level");
+                    Console.WriteLine("Please enter number 1-7");
+
+                    int answer;
+                    if (!int.TryParse(Console.ReadLine(), out  answer))
+                    {
+                        Console.WriteLine("Cannot retrive answer");
+                    }
+                    else 
+                    {
+                        switch (answer)
+                        {
+                            case 1:
+                                Console.WriteLine("Please enter name");
+                                string name = Console.ReadLine();
+                                p.Name = name;
+                             break;
+
+                            case 2:
+                                Console.WriteLine("Please enter surname");
+                                string surname = Console.ReadLine();
+                                p.Surname = surname;
+                                break;
+
+                            case 3:
+                                Console.WriteLine("Please enter age");
+                                int age = int.Parse(Console.ReadLine());
+                                p.Age = age;
+                                break;
+
+                            case 4:
+                                Console.WriteLine("Please enter address");
+                                string address = Console.ReadLine();
+                                p.Address = address;
+                                break;
+
+                            case 5:
+                                Console.WriteLine("Please enter blood type");
+                                string bloodtype = Console.ReadLine();
+                                p.BloodType = bloodtype;
+                                break;
+
+                            case 6:
+                                Console.WriteLine("Please enter medical condition");
+                                string mc = Console.ReadLine();
+                                p.MedicalCon = mc;
+                                break;
+
+                            case 7:
+                                Console.WriteLine("Please enter priority level");
+                                string pl = Console.ReadLine();
+                                p.PriorityLevel = pl;
+                                break;
+                        }
+                    }
+                    
+                }
             }
 
             public void Delete(string id)
@@ -164,6 +349,7 @@ namespace Eish.Models
                 }
             }
 
+            //======= Apointment ========
             public class Appointment
             {
                 private string appointID;
@@ -200,9 +386,11 @@ namespace Eish.Models
                     Patient = p;
                     Doctor = d;
                     Date = date;
-                    Status = status;
+                  //  Status = status;
                 }
             }
+
+            // ======= Appointment Manager ========
             public class AppointmentManger
             {
                 public List<Appointment> AppointmentList = new List<Appointment>();
@@ -213,10 +401,10 @@ namespace Eish.Models
                     string answer = Console.ReadLine();
                     if ((answer) == "yes")
                     {
-                        Console.WriteLine("Please give me your ID number");
+                        Console.WriteLine("Please enter patient ID");
                         string id = Console.ReadLine();
+
                         PatientManager manager = new PatientManager();
-                     
                         Patient p = manager.Search(id);
 
                         char firstInitial = p.Name[0];
@@ -228,18 +416,28 @@ namespace Eish.Models
                         int number = random.Next(1, 100);
 
                         string appointmentID = $"{firstInitial}{secondInitial}{idAppoint}-{number}";
+                       
 
-                        if (Doctor d.status == "Scheduled" )
+                        Console.WriteLine("Please enter Doctor employee ID");
+                        string employeeID = Console.ReadLine();
+
+                        DoctorManager doctorManager = new DoctorManager();
+                        Doctor d = doctorManager.Search(employeeID);
+
+                        DateTime date = new DateTime(); 
+
+                        if ( d.Availability == "Scheduled" )
                         {
                             Console.WriteLine("Doctor is scheduled, please try another date");
                         }
-                        else if(d.status == "Unavaible")
+                        else if(d.Availability == "Unaviable")
                         {
-                            Console.WriteLine($"Doctor {Doctor.Name} is unavaible, please try again");
+                            Console.WriteLine($"Doctor {d.Name} is unavaible, please try again");
                         }
                         else 
                         {
-                            // doctor 
+                            Appointment appointment = new Appointment(appointmentID,p,d,date);
+                           
                         }
                     }
                 }
