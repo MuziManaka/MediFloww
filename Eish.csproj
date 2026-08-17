@@ -58,6 +58,10 @@
     <Compile Include="Forms\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\Interface1.cs" />
+    <Compile Include="Mangers\AppointmentManager.cs" />
+    <Compile Include="Mangers\DoctorManager.cs" />
+    <Compile Include="Mangers\PatientManager.cs" />
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\Patient.cs" />
@@ -93,8 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Execptions\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Mangers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
