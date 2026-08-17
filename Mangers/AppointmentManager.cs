@@ -70,6 +70,9 @@ namespace Eish.Mangers
                     Appointment appointment = new Appointment(appointmentID, p, d, date, time);// find a way to display only the patient name and dotor name
                     AppointmentList.Add(appointment);
 
+                    AppointmentBooked?.Invoke(this, EventArgs.Empty);
+                    AppointmentManager.AppointmentBooked += OnBooked;
+
                 }
 
             }
@@ -173,7 +176,8 @@ namespace Eish.Mangers
                 if (answer == "Yes")
                 {
                     AppointmentList.Remove(a);
-                    Console.WriteLine("Appointment has been succcessfully canceled ");
+                    AppointmentCancelled?.Invoke(this, EventArgs.Empty)
+                    AppointmentManager.AppoinmentCancelled += onCancelled;
                 }
                 else
                 {
@@ -187,6 +191,16 @@ namespace Eish.Mangers
             return !AppointmentList.Any(a => a.Doctor.EmployeeID == doctor.EmployeeID && a.Date.Date == date.Date && a.Time == time && a.Status == "Avaiable");
         }
 
+        public event EventHandler AppointmentBooked;
+        public event EventHandler AppointmentCancelled;
+        public void OnBooked(object sender, EventArgs e)
+        {
+            Console.WriteLine("Appointment has been booked!");
+        }
+        public void onCancelled(object sender, EventArgs e)
+        {
+            Console.WriteLine("Appointment has been canceled");
+        }
 
     }
 }

@@ -27,6 +27,8 @@ namespace Eish.Mangers
         public void Add(Patient paitent)
         {
             PaitentList.Add(paitent);
+            PatientAdmitted?.Invoke(this, EventArgs.Empty);
+            PatientManager.PatientAdmitted += OnPatientAdmitted;
         }
 
         public Patient Search(string Id)
@@ -127,5 +129,13 @@ namespace Eish.Mangers
                 Console.WriteLine(patient);
             }
         }
+
+        public event EventHandler PatientAdmitted;
+
+        public void OnPatientAdmitted(object sender, EventArgs e)
+        {
+            Console.WriteLine("A patient has been admitted!");
+        }
+
     }
 }
