@@ -56,7 +56,7 @@ namespace Eish.Models
 
                 set
                 {
-                    if (value <= 0)
+                    if (value >= 0)
                     {
                         age = value;
                     }
@@ -80,11 +80,11 @@ namespace Eish.Models
                 Address = address;
                 Gender = gender;
             }
-            public virtual void DisplayInfo()
-            {
+           public override string ToString()
+           {
 
-            }
-
+                   return string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5} ID, Name, Surname, Age, Address, Gender")
+           }
         }
     }
 
