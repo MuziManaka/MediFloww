@@ -7,55 +7,52 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Eish.Models;
 using Eish.Mangers;
+using Eish.Enums;
 
 namespace Eish.Models
 { 
-    //======= Apointment ========
-   public class Appointment
+   
+   internal class Appointment
     {
-        private string appointID;
-        private PatientManager patientManager;
-        private DoctorManager doctorManager;
-        public string AppointID
-        {
-            get
-            {
-                return appointID;
-            }
-            set
-            {
-                if (value.Length != 13)
+       private string appointID;
+
+        public string AppointID 
+        { 
+            get => appointID; 
+            set 
+            { 
+                if(string.IsNullOrEmpty(value))
                 {
-                    throw new ArgumentException("ID number should contain 13 numbers");
+                    throw new ArgumentException("Appointment ID cannot be null or empty.");
                 }
                 else
+                {
                     appointID = value;
-
-            }
+                }
+            } 
         }
         public Patient Patient { get; set; }
-        // the doctor class ask armando
+       
         public Doctor Doctor { get; set; }
         public DateTime Date { get; set; }
-        // i also want to add time
+       
         public TimeSpan Time { get; set; }
 
-        public string Department { get; set; }
+        public Department Department { get; set; }
 
-        public string Status { get; set; }
+        public AppointmentStatus Status { get; set; }
 
-        public Appointment(string appointId, Patient p, Doctor d, DateTime date, TimeSpan time)
+        public Appointment(string appointId, Patient p, Doctor d, DateTime date, TimeSpan time, Department _department, AppointmentStatus _status)
         {
             AppointID = appointId;
             Patient.Name= p.Name;
             Doctor.Name = d.Name;
             Date = date;
             Time = time;
-            //  Status = status;
+            Department.DepartmentName = _department.DepartmentName;
+            Status = _status;
         }
     }
-
-    // ======= Appointment Manager ========
     
 }
 

@@ -46,6 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\AppointmentStatus.cs" />
+    <Compile Include="Enums\WardType.cs" />
+    <Compile Include="Enums\RoomStatus.cs" />
+    <Compile Include="Enums\Priority.cs" />
+    <Compile Include="Enums\PaymentStatus.cs" />
+    <Compile Include="Enums\DoctorAvailabilty.cs" />
+    <Compile Include="Enums\PaymentMethodType.cs" />
     <Compile Include="Forms\Dashboard.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +70,14 @@
     <Compile Include="Mangers\DoctorManager.cs" />
     <Compile Include="Mangers\PatientManager.cs" />
     <Compile Include="Models\Appointment.cs" />
+    <Compile Include="Models\Invoice.cs" />
+    <Compile Include="Models\Payment.cs" />
+    <Compile Include="Models\Medication.cs" />
+    <Compile Include="Models\Prescription.cs" />
+    <Compile Include="Models\PrescriptionDetail.cs" />
+    <Compile Include="Models\Room.cs" />
+    <Compile Include="Models\Ward.cs" />
+    <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Doctor.cs" />
     <Compile Include="Models\Patient.cs" />
     <Compile Include="Models\Person.cs" />
